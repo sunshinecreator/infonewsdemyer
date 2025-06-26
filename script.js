@@ -7,8 +7,12 @@ async function processText() {
 
   let output = input;
 
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   for (const [newWord, oldWord] of Object.entries(mapping)) {
-    const regex = new RegExp(newWord, 'g');
+    const regex = new RegExp(escapeRegExp(newWord), 'g');
     output = output.replace(regex, oldWord);
   }
 
